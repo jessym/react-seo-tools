@@ -1,16 +1,25 @@
 import React from 'react';
 
-type MetaTags = {
-  title?: string;
+export type MetaTagsOptions = {
   noIndex?: boolean;
+  title?: string;
   description?: string;
 };
 
-export function generateMetaTags(metaTags: MetaTags) {
-  const x = <title>{metaTags.title}</title>;
+export function generateMetaTags(options: MetaTagsOptions) {
+  const tags: JSX.Element[] = [];
+  if (options.noIndex) {
+    tags.push(<meta key="rst-noindex" name="robots" content="noindex" />);
+  }
+  if (options.title) {
+    tags.push(<title key="rst-title">{options.title}</title>);
+  }
+  if (options.description) {
+    tags.push(<meta key="rst-description" name="description" content={options.description} />)
+  }
   return (
     <React.Fragment>
-      <meta />
+      {tags}
     </React.Fragment>
   );
 }

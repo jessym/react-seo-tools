@@ -26,9 +26,8 @@ module.exports = {
   },
   // target: 'es5',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'lib'),
     filename: '[name].js',
-    library: 'SeoTools',
     libraryTarget: 'umd',
     globalObject: 'this',
     umdNamedDefine: true,

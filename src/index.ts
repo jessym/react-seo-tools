@@ -1,9 +1,3 @@
-import { generateMetaTags } from './generateMetaTags';
-import { generateRobotsTxt } from './generateRobotsTxt';
-import { generateSitemapXml } from './generateSitemapXml';
-
-export default {
-  generateMetaTags,
-  generateRobotsTxt,
-  generateSitemapXml,
-};
+export * from './generateMetaTags';
+export * from './generateRobotsTxt';
+export * from './generateSitemapXml';
