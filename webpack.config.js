@@ -28,6 +28,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: '[name].js',
+    library: 'ReactSeoTools',
     libraryTarget: 'umd',
     globalObject: 'this',
     umdNamedDefine: true,

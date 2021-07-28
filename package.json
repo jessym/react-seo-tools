@@ -4,9 +4,9 @@
   "license": "MIT",
 
   "name": "react-seo-tools",
-  "version": "1.0.0-alpha.1",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "version": "1.0.0-alpha.3",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "/lib"
   ],
