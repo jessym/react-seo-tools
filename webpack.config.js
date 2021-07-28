@@ -8,7 +8,7 @@ const packageDotJson = require('./package.json');
 module.exports = {
   entry: {
     index: './src/index.ts',
-    generateMetaTags: './src/generateMetaTags.tsx',
+    generateHeadTags: './src/generateHeadTags.tsx',
     generateRobotsTxt: './src/generateRobotsTxt.ts',
     generateSitemapXml: './src/generateSitemapXml.ts',
   },
