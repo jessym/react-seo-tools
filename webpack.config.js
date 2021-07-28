@@ -24,11 +24,9 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  // target: 'es5',
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: '[name].js',
-    library: 'ReactSeoTools',
     libraryTarget: 'umd',
     globalObject: 'this',
     umdNamedDefine: true,
