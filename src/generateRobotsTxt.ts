@@ -1,11 +1,11 @@
-type Policy = {
+export type RobotsTxtPolicy = {
   userAgent?: string | string[];
   allow?: string | string[];
   disallow?: string | string[];
 };
 
 export type RobotsTxtOptions = {
-  policy?: Policy | Policy[];
+  policy?: RobotsTxtPolicy | RobotsTxtPolicy[];
   sitemap?: string | string[];
 };
 
@@ -31,5 +31,8 @@ function toArray<T>(argument?: T | T[]): T[] {
   if (Array.isArray(argument)) {
     return argument;
   }
-  return [argument as T].filter((element) => element !== undefined && element !== null);
+  if (argument !== undefined && argument !== null) {
+    return [argument];
+  }
+  return [];
 }

@@ -34,5 +34,8 @@
   },
   "license": "MIT",
   "author": "Jessy <jessym@jessym.com>",
-  "repository": "git@github.com:jessym/react-seo-tools.git"
+  "repository": "git@github.com:jessym/react-seo-tools.git",
+  "dependencies": {
+    "xmlbuilder2": "^3.0.0"
+  }
 }
