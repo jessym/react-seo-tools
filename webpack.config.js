@@ -1,6 +1,6 @@
 const path = require('path');
 const { DefinePlugin } = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const RemovePlugin = require('remove-files-webpack-plugin');
 const packageDotJson = require('./package.json');
 
 // https://itnext.io/how-to-build-and-publish-npm-packages-with-webpack-dea19bb14627
@@ -35,7 +35,19 @@ module.exports = {
     minimize: false,
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new RemovePlugin({
+      before: {
+        include: ['./lib'],
+      },
+      after: {
+        test: [
+          {
+            folder: './lib',
+            method: (filePath) => filePath.match(/\.(spec|test)\./),
+          },
+        ],
+      },
+    }),
     new DefinePlugin({
       BUILD_PACKAGE_VERSION: JSON.stringify(packageDotJson.version),
     }),

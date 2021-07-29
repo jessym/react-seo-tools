@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type MetaTagsOptions = {
+export type HeadTagsOptions = {
   noIndex?: boolean;
   title?: string;
   description?: string;
@@ -21,7 +21,7 @@ export type MetaTagsOptions = {
   };
 };
 
-export function generateHeadTags(options: MetaTagsOptions): JSX.Element[] {
+export function generateHeadTags(options: HeadTagsOptions): JSX.Element[] {
   const tags: JSX.Element[] = [];
 
   if (options.noIndex) {
