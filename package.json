@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "testw": "jest --watch",
     "build": "webpack --mode production"
   },
   "peerDependencies": {
