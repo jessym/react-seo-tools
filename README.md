@@ -4,7 +4,7 @@ This library for React-based websites and applications can be used to:
 
 - generate SEO-related tags for the HTML `<head>` section
 - generate a `robots.txt` file for search engine crawlers
-- generate a `sitemap.xml` overview file of URLs
+- generate a `sitemap.xml` overview of URLs
 
 # Installation
 
@@ -35,7 +35,7 @@ import { generateSitemapXml } from 'react-seo-tools/lib/generateSitemapXml';
 
 # Usage
 
-## GenerateHeadTags / [API Options](./src/generateHeadTags.tsx)
+## GenerateHeadTags ([API Options](./src/generateHeadTags.tsx))
 
 This function generates an array of elements which can be inserted into the `<head>` section of your HTML page.
 
@@ -92,7 +92,7 @@ export default function ArticlePage() {
 **********************/
 ```
 
-## GenerateRobotsTxt / [API Options](./src/generateRobotsTxt.ts)
+## GenerateRobotsTxt / ([API Options](./src/generateRobotsTxt.ts))
 
 This function generates a string which can be served as your website's `robots.txt` file.
 
@@ -155,7 +155,7 @@ sitemap: http://localhost:8080/sitemap.xml
 **********************/
 ```
 
-## GenerateSitemapXml / [API Options](./src/generateSitemapXml.ts)
+## GenerateSitemapXml / ([API Options](./src/generateSitemapXml.ts))
 
 This function generates a string which can be served as your website's `sitemap.xml` file.
 
