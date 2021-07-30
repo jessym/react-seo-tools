@@ -40,6 +40,7 @@ import { generateSitemapXml } from 'react-seo-tools/lib/generateSitemapXml';
 > [Click here for an overview of the available API options](./src/generateHeadTags.tsx)
 
 This function generates an array of elements which can be inserted into the `<head>` section of your HTML page.
+
 If you're using the [**Next.js**](https://nextjs.org/) framework,
 you would render these elements inside `<Head></Head>`, as shown by the example below.
 
