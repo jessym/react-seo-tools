@@ -92,7 +92,7 @@ export default function ArticlePage() {
 **********************/
 ```
 
-## GenerateRobotsTxt / ([API Options](./src/generateRobotsTxt.ts))
+## GenerateRobotsTxt ([API Options](./src/generateRobotsTxt.ts))
 
 This function generates a string which can be served as your website's `robots.txt` file.
 
@@ -155,7 +155,7 @@ sitemap: http://localhost:8080/sitemap.xml
 **********************/
 ```
 
-## GenerateSitemapXml / ([API Options](./src/generateSitemapXml.ts))
+## GenerateSitemapXml ([API Options](./src/generateSitemapXml.ts))
 
 This function generates a string which can be served as your website's `sitemap.xml` file.
 
