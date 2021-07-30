@@ -12,16 +12,6 @@ enum Asset {
   generateSitemapXml = 'generateSitemapXml',
 }
 
-const browserAssets = Object.values(Asset).filter((asset) => {
-  const mapping: Record<Asset, boolean> = {
-    [Asset.index]: false,
-    [Asset.generateHeadTags]: true,
-    [Asset.generateRobotsTxt]: false,
-    [Asset.generateSitemapXml]: false,
-  };
-  return mapping[asset];
-});
-
 // https://itnext.io/how-to-build-and-publish-npm-packages-with-webpack-dea19bb14627
 // https://medium.com/@jdxcode/for-the-love-of-god-dont-use-npmignore-f93c08909d8d
 module.exports = {
@@ -50,9 +40,6 @@ module.exports = {
     globalObject: 'this',
     umdNamedDefine: true,
   },
-  optimization: {
-    minimize: false,
-  },
   plugins: [
     new RemovePlugin({
       before: {
@@ -71,9 +58,15 @@ module.exports = {
       BUILD_PACKAGE_VERSION: JSON.stringify(packageDotJson.version),
     }),
   ],
+  optimization: {
+    minimize: true,
+  },
   performance: {
     hints: 'error',
-    maxAssetSize: 15000, // 15 kiB
-    assetFilter: (filePath: string) => browserAssets.some((browserAsset) => filePath.includes(browserAsset)),
+    maxAssetSize: 10_000, // 10 kiB
+    assetFilter: (filePath: string) => {
+      const browserAssets = [Asset.generateHeadTags];
+      return browserAssets.some((browserAsset) => filePath.includes(browserAsset));
+    },
   },
 };

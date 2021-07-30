@@ -1,6 +1,6 @@
-import { create } from 'xmlbuilder2';
+import { toXML, XmlElement } from 'jstoxml';
 
-export enum ChangeFreq {
+export enum Changefreq {
   always = 'always',
   hourly = 'hourly',
   daily = 'daily',
@@ -14,7 +14,7 @@ export type SitemapXmlOptions = {
   urlSet?: Array<{
     loc: string;
     lastmod?: string;
-    changefreq?: ChangeFreq | string;
+    changefreq?: Changefreq | string;
     priority?: number;
   }>;
   sitemapIndex?: Array<{
@@ -31,24 +31,51 @@ export function generateSitemapXml(options: SitemapXmlOptions): string {
   if (options.urlSet && options.sitemapIndex) {
     throw new Error(`Either a 'urlset' or a 'sitemapindex' can be generated, but not both`);
   }
-  const xml = create({ version: '1.0', encoding: 'UTF-8' });
+
+  let root: XmlElement = {};
+
   if (options.urlSet) {
-    const root = xml.ele('urlset', { xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9' });
+    root = {
+      _name: 'urlset',
+      _attrs: { xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9' },
+      _content: [],
+    };
     options.urlSet.forEach(({ loc, lastmod, changefreq, priority }) => {
-      const url = root.ele('url');
-      url.ele('loc').txt(loc);
-      if (lastmod) url.ele('lastmod').txt(lastmod);
-      if (changefreq) url.ele('changefreq').txt(changefreq);
-      if (typeof priority === 'number') url.ele('priority').txt(String(priority));
+      const url: XmlElement = {
+        _name: 'url',
+        _content: [],
+      };
+      const urlContent = url._content as XmlElement[];
+      urlContent.push({ loc });
+      if (lastmod) urlContent.push({ lastmod });
+      if (changefreq) urlContent.push({ changefreq });
+      if (typeof priority === 'number') urlContent.push({ priority });
+      // Add to root
+      (root._content as XmlElement[]).push(url);
     });
   }
+
   if (options.sitemapIndex) {
-    const root = xml.ele('sitemapindex', { xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9' });
+    root = {
+      _name: 'sitemapindex',
+      _attrs: { xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9' },
+      _content: [],
+    };
     options.sitemapIndex.forEach(({ loc, lastmod }) => {
-      const sitemap = root.ele('sitemap');
-      sitemap.ele('loc').txt(loc);
-      if (lastmod) sitemap.ele('lastmod').txt(lastmod);
+      const sitemap: XmlElement = {
+        _name: 'sitemap',
+        _content: [],
+      };
+      const sitemapContent = sitemap._content as XmlElement[];
+      sitemapContent.push({ loc });
+      if (lastmod) sitemapContent.push({ lastmod });
+      // Add to root
+      (root._content as XmlElement[]).push(sitemap);
     });
   }
-  return xml.end({ prettyPrint: options.pretty });
+
+  return toXML(root, {
+    indent: options.pretty ? '  ' : undefined,
+    header: '<?xml version="1.0" encoding="UTF-8"?>',
+  });
 }

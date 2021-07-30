@@ -9,6 +9,9 @@ export type RobotsTxtOptions = {
   sitemap?: string | string[];
 };
 
+/**
+ * For more information, see: https://developers.google.com/search/docs/advanced/robots/create-robots-txt
+ */
 export function generateRobotsTxt(options: RobotsTxtOptions): string {
   const blocks: string[] = [];
 

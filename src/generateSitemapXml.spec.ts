@@ -1,4 +1,4 @@
-import { ChangeFreq, generateSitemapXml } from './generateSitemapXml';
+import { Changefreq, generateSitemapXml } from './generateSitemapXml';
 
 describe(generateSitemapXml, () => {
   it('generates an empty file if no options were specified', () => {
@@ -26,8 +26,8 @@ describe(generateSitemapXml, () => {
       urlSet: [
         { loc: '/' },
         { loc: '/articles', lastmod: '2020-12-31' },
-        { loc: '/articles/123', lastmod: '2020-12-31', changefreq: ChangeFreq.daily },
-        { loc: '/articles/123/comments', lastmod: '2020-12-31', changefreq: ChangeFreq.daily, priority: 0.2 },
+        { loc: '/articles/123', lastmod: '2020-12-31', changefreq: Changefreq.daily },
+        { loc: '/articles/123/comments', lastmod: '2020-12-31', changefreq: Changefreq.daily, priority: 0.2 },
       ],
       pretty: true,
     });
