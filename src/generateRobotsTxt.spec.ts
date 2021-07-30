@@ -21,9 +21,9 @@ describe(generateRobotsTxt, () => {
 
     // Then
     const expected = `
-user-agent: *
-allow: /abc
-disallow: /def
+User-agent: *
+Allow: /abc
+Disallow: /def
     `;
     expect(file).toEqual(expected.trim());
   });
@@ -45,13 +45,13 @@ disallow: /def
 
     // Then
     const expected = `
-user-agent: googlebot
-user-agent: googlebot-news
-allow: /
+User-agent: googlebot
+User-agent: googlebot-news
+Allow: /
 
-user-agent: *
-disallow: /abc
-disallow: /def
+User-agent: *
+Disallow: /abc
+Disallow: /def
     `;
     expect(file).toEqual(expected.trim());
   });
@@ -64,7 +64,7 @@ disallow: /def
 
     // Then
     const expected = `
-sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://www.example.com/sitemap.xml
     `;
     expect(file).toEqual(expected.trim());
   });
@@ -77,8 +77,8 @@ sitemap: https://www.example.com/sitemap.xml
 
     // Then
     const expected = `
-sitemap: https://www.example.com/sitemap.xml
-sitemap: https://www.example.com/sitemap2.xml
+Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://www.example.com/sitemap2.xml
     `;
     expect(file).toEqual(expected.trim());
   });

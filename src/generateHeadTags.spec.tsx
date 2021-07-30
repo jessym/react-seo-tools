@@ -3,7 +3,7 @@ import React from 'react';
 import { generateHeadTags } from './generateHeadTags';
 
 describe(generateHeadTags, () => {
-  it('returns an empty array for an empty options object', () => {
+  it('renders nothing for an empty options object', () => {
     // Given
     const tags = generateHeadTags({});
 

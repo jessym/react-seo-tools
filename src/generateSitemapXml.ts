@@ -25,7 +25,8 @@ export type SitemapXmlOptions = {
 };
 
 /**
- * For more information, see: https://www.sitemaps.org/protocol.html
+ * For more information, see:
+ *  - https://www.sitemaps.org/protocol.html
  */
 export function generateSitemapXml(options: SitemapXmlOptions): string {
   if (options.urlSet && options.sitemapIndex) {

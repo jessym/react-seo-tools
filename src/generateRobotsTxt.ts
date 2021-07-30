@@ -10,21 +10,23 @@ export type RobotsTxtOptions = {
 };
 
 /**
- * For more information, see: https://developers.google.com/search/docs/advanced/robots/create-robots-txt
+ * For more information, see:
+ *  - https://www.robotstxt.org/robotstxt.html
+ *  - https://developers.google.com/search/docs/advanced/robots/create-robots-txt
  */
 export function generateRobotsTxt(options: RobotsTxtOptions): string {
   const blocks: string[] = [];
 
   toArray(options.policy).forEach((policy) => {
     let policyBlock = '';
-    toArray(policy.userAgent).forEach((ua) => (policyBlock += `user-agent: ${ua}\n`));
-    toArray(policy.allow).forEach((a) => (policyBlock += `allow: ${a}\n`));
-    toArray(policy.disallow).forEach((d) => (policyBlock += `disallow: ${d}\n`));
+    toArray(policy.userAgent).forEach((ua) => (policyBlock += `User-agent: ${ua}\n`));
+    toArray(policy.allow).forEach((a) => (policyBlock += `Allow: ${a}\n`));
+    toArray(policy.disallow).forEach((d) => (policyBlock += `Disallow: ${d}\n`));
     blocks.push(policyBlock);
   });
 
   let sitemapBlock = '';
-  toArray(options.sitemap).forEach((s) => (sitemapBlock += `sitemap: ${s}\n`));
+  toArray(options.sitemap).forEach((s) => (sitemapBlock += `Sitemap: ${s}\n`));
   blocks.push(sitemapBlock);
 
   return blocks.filter(Boolean).join('\n').trim();
