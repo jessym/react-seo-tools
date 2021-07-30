@@ -35,9 +35,7 @@ import { generateSitemapXml } from 'react-seo-tools/lib/generateSitemapXml';
 
 # Usage
 
-## GenerateHeadTags
-
-> [Click here for an overview of the available API options](./src/generateHeadTags.tsx)
+## GenerateHeadTags / [API Options](./src/generateHeadTags.tsx)
 
 This function generates an array of elements which can be inserted into the `<head>` section of your HTML page.
 
@@ -94,9 +92,7 @@ export default function ArticlePage() {
 **********************/
 ```
 
-## GenerateRobotsTxt
-
-> [Click here for an overview of the available API options](./src/generateRobotsTxt.ts)
+## GenerateRobotsTxt / [API Options](./src/generateRobotsTxt.ts)
 
 This function generates a string which can be served as your website's `robots.txt` file.
 
@@ -159,9 +155,7 @@ sitemap: http://localhost:8080/sitemap.xml
 **********************/
 ```
 
-## GenerateSitemapXml
-
-> [Click here for an overview of the available API options](./src/generateSitemapXml.ts)
+## GenerateSitemapXml / [API Options](./src/generateSitemapXml.ts)
 
 This function generates a string which can be served as your website's `sitemap.xml` file.
 
