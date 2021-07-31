@@ -102,7 +102,7 @@ Here's how you would use it in a **Next.js lambda**.
 ```ts
 import { generateRobotsTxt } from 'react-seo-tools/lib/generateRobotsTxt';
 
-export default function (req, res) {
+export default function (req: NextApiRequest, res: NextApiResponse) {
   const robotsTxt = generateRobotsTxt({
     policy: {
       userAgent: '*',
@@ -127,12 +127,12 @@ Sitemap: http://localhost:8080/sitemap.xml
 And here's how you'd use it with **Express in a Node environment**.
 
 ```js
-const express = require('express');
+const express, { Request, Response } = require('express');
 const { generateRobotsTxt } = require('react-seo-tools/lib/generateRobotsTxt');
 
 const app = express();
 
-app.get('/robots.txt', (req, res) => {
+app.get('/robots.txt', (req: Request, res: Response) => {
   const robotsTxt = generateRobotsTxt({
     policy: {
       userAgent: '*',
@@ -200,12 +200,12 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
 And here's how you'd use it with **Express in a Node environment**.
 
 ```js
-const express = require('express');
+const express, { Request, Response } = require('express');
 const { generateSitemapXml, Changefreq } = require('react-seo-tools/lib/generateSitemapXml');
 
 const app = express();
 
-app.get('/sitemap.xml', (req, res) => {
+app.get('/sitemap.xml', (req: Request, res: Response) => {
   const sitemapXml = generateSitemapXml({
     urlSet: [
       { loc: '/' },

@@ -29,7 +29,10 @@ export function generateRobotsTxt(options: RobotsTxtOptions): string {
   toArray(options.sitemap).forEach((s) => (sitemapBlock += `Sitemap: ${s}\n`));
   blocks.push(sitemapBlock);
 
-  return blocks.filter(Boolean).join('\n').trim();
+  return blocks
+    .map((block) => block.trim())
+    .filter(Boolean)
+    .join('\n\n');
 }
 
 function toArray<T>(argument?: T | T[]): T[] {
