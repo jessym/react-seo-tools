@@ -29,13 +29,13 @@ describe(generateHeadTags, () => {
 
     // When
     const { container } = render(<>{tags}</>);
-    const el = container.children[0];
+    const element = container.children[0];
 
     // Then
     expect(container.children.length).toEqual(1);
-    expect(el.tagName).toEqual('META');
-    expect(el.getAttribute('name')).toEqual('robots');
-    expect(el.getAttribute('content')).toEqual('noindex');
+    expect(element.tagName).toEqual('META');
+    expect(element.getAttribute('name')).toEqual('robots');
+    expect(element.getAttribute('content')).toEqual('noindex');
   });
 
   it('renders a title tag', () => {
@@ -44,12 +44,12 @@ describe(generateHeadTags, () => {
 
     // When
     const { container } = render(<>{tags}</>);
-    const el = container.children[0];
+    const element = container.children[0];
 
     // Then
     expect(container.children.length).toEqual(1);
-    expect(el.tagName).toEqual('TITLE');
-    expect(el.innerHTML).toEqual('Hello World');
+    expect(element.tagName).toEqual('TITLE');
+    expect(element.innerHTML).toEqual('Hello World');
   });
 
   it('renders a description tag', () => {
@@ -58,13 +58,13 @@ describe(generateHeadTags, () => {
 
     // When
     const { container } = render(<>{tags}</>);
-    const el = container.children[0];
+    const element = container.children[0];
 
     // Then
     expect(container.children.length).toEqual(1);
-    expect(el.tagName).toEqual('META');
-    expect(el.getAttribute('name')).toEqual('description');
-    expect(el.getAttribute('content')).toEqual('My beautiful page');
+    expect(element.tagName).toEqual('META');
+    expect(element.getAttribute('name')).toEqual('description');
+    expect(element.getAttribute('content')).toEqual('My beautiful page');
   });
 
   it('renders OpenGraph tags', () => {
@@ -109,13 +109,13 @@ describe(generateHeadTags, () => {
 
     // When
     const { container } = render(<>{tags}</>);
-    const el = container.children[0];
+    const element = container.children[0];
 
     // Then
     expect(container.children.length).toEqual(1);
-    expect(el.tagName).toEqual('SCRIPT');
-    expect(el.getAttribute('type')).toEqual('application/ld+json');
-    expect(JSON.parse(el.innerHTML)).toEqual({
+    expect(element.tagName).toEqual('SCRIPT');
+    expect(element.getAttribute('type')).toEqual('application/ld+json');
+    expect(JSON.parse(element.innerHTML)).toEqual({
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
@@ -140,13 +140,13 @@ describe(generateHeadTags, () => {
 
     // When
     const { container } = render(<>{tags}</>);
-    const el = container.children[0];
+    const element = container.children[0];
 
     // Then
     expect(container.children.length).toEqual(1);
-    expect(el.tagName).toEqual('SCRIPT');
-    expect(el.getAttribute('type')).toEqual('application/ld+json');
-    expect(JSON.parse(el.innerHTML)).toEqual({
+    expect(element.tagName).toEqual('SCRIPT');
+    expect(element.getAttribute('type')).toEqual('application/ld+json');
+    expect(JSON.parse(element.innerHTML)).toEqual({
       '@context': 'https://schema.org',
       '@type': 'Article',
       headline: 'How to Test with Jest',
