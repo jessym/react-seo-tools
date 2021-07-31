@@ -100,6 +100,7 @@ This function generates a string which can be served as your website's `robots.t
 Here's how you would use it in a **Next.js lambda**.
 
 ```ts
+import { NextApiRequest, NextApiResponse } from 'next';
 import { generateRobotsTxt } from 'react-seo-tools/lib/generateRobotsTxt';
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
@@ -127,12 +128,12 @@ Sitemap: http://localhost:8080/sitemap.xml
 And here's how you'd use it with **Express in a Node environment**.
 
 ```js
-const express, { Request, Response } = require('express');
+const express = require('express');
 const { generateRobotsTxt } = require('react-seo-tools/lib/generateRobotsTxt');
 
 const app = express();
 
-app.get('/robots.txt', (req: Request, res: Response) => {
+app.get('/robots.txt', (req, res) => {
   const robotsTxt = generateRobotsTxt({
     policy: {
       userAgent: '*',
@@ -162,6 +163,7 @@ This function generates a string which can be served as your website's `sitemap.
 Here's how you would use it in a **Next.js lambda**.
 
 ```ts
+import { NextApiRequest, NextApiResponse } from 'next';
 import { generateSitemapXml, Changefreq } from 'react-seo-tools/lib/generateSitemapXml';
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
@@ -199,13 +201,13 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
 
 And here's how you'd use it with **Express in a Node environment**.
 
-```js
-const express, { Request, Response } = require('express');
+```ts
+const express = require('express');
 const { generateSitemapXml, Changefreq } = require('react-seo-tools/lib/generateSitemapXml');
 
 const app = express();
 
-app.get('/sitemap.xml', (req: Request, res: Response) => {
+app.get('/sitemap.xml', (req, res) => {
   const sitemapXml = generateSitemapXml({
     urlSet: [
       { loc: '/' },
