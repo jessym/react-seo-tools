@@ -23,49 +23,44 @@ npm install react-seo-tools
 # Imports
 
 ```ts
-// This imports the entire bundle via this library's index file
-import { SeoHeadTags, generateRobotsTxt, generateSitemapXml } from 'react-seo-tools';
-
-// But each of these utilities can also be imported from their own file,
-// which might help in keeping your own website's bundle size low
-import { SeoHeadTags } from 'react-seo-tools/lib/SeoHeadTags';
+import { generateHeadTags } from 'react-seo-tools/lib/generateHeadTags';
 import { generateRobotsTxt } from 'react-seo-tools/lib/generateRobotsTxt';
 import { generateSitemapXml } from 'react-seo-tools/lib/generateSitemapXml';
 ```
 
 # Usage
 
-## SeoHeadTags ([API Options](./src/SeoHeadTags.tsx))
+## GenerateHeadTags ([API Options](./src/generateHeadTags.tsx))
 
-This React component is used for rendering a set of SEO-related tags which can be inserted into the `<head>` section of your HTML page.
+This function generates an array of elements which can be inserted into the `<head>` section of your HTML page.
 
 If you're using the [**Next.js**](https://nextjs.org/) framework,
-you would render `<SeoHeadTags />` inside a pair of `<Head></Head>`, as shown by the example below.
+you would render these elements inside `<Head></Head>`, as shown by the example below.
 
 If you're not using Next.js,
 you might want to consider including the [**react-helmet**](https://github.com/nfl/react-helmet) library in your project,
-so you can render `<SeoHeadTags/>` inside a pair of `<Helmet></Helmet>` tags.
+so you can render the head elements inside a pair of `<Helmet></Helmet>` tags.
 
 ```tsx
 import Head from 'next/head';
-import { SeoHeadTags } from 'react-seo-tools/lib/SeoHeadTags';
+import { generateHeadTags } from 'react-seo-tools/lib/generateHeadTags';
 
 export default function ArticlePage() {
   return (
     <div>
       <Head>
-        <SeoHeadTags
-          title="Website - Articles - How to SEO"
-          description="Want to learn SEO with React? Look no further!",
-          openGraph={{
+        {generateHeadTags({
+          title: 'Website - Articles - How to SEO',
+          description: 'Want to learn SEO with React? Look no further!',
+          openGraph: {
             type: 'article',
             title: 'How to SEO',
             image: 'https://www.example.com/how-to-seo.jpg',
             'article:author': 'Jessy',
             'article:tag': ['react', 'testing'],
             'article:published_time': '2020-12-31',
-          }}
-        />
+          },
+        })}
       </Head>
       <main>
         <h1>How to SEO</h1>

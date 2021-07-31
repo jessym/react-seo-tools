@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { SeoHeadTags, SeoHeadTagsProps } from './SeoHeadTags';
+import { generateHeadTags } from './generateHeadTags';
 
-describe(SeoHeadTags, () => {
+describe(generateHeadTags, () => {
   beforeEach(() => {
     jest.spyOn(console, 'error');
   });
@@ -14,10 +14,10 @@ describe(SeoHeadTags, () => {
 
   it('renders nothing for an empty options object', () => {
     // Given
-    const props: SeoHeadTagsProps = {};
+    const tags = generateHeadTags({});
 
     // When
-    const { container } = render(<SeoHeadTags {...props} />);
+    const { container } = render(<>{tags}</>);
 
     // Then
     expect(container.children.length).toEqual(0);
@@ -25,10 +25,10 @@ describe(SeoHeadTags, () => {
 
   it('renders a noIndex tag', () => {
     // Given
-    const props: SeoHeadTagsProps = { noIndex: true };
+    const tags = generateHeadTags({ noIndex: true });
 
     // When
-    const { container } = render(<SeoHeadTags {...props} />);
+    const { container } = render(<>{tags}</>);
     const el = container.children[0];
 
     // Then
@@ -40,10 +40,10 @@ describe(SeoHeadTags, () => {
 
   it('renders a title tag', () => {
     // Given
-    const props: SeoHeadTagsProps = { title: 'Hello World' };
+    const tags = generateHeadTags({ title: 'Hello World' });
 
     // When
-    const { container } = render(<SeoHeadTags {...props} />);
+    const { container } = render(<>{tags}</>);
     const el = container.children[0];
 
     // Then
@@ -54,10 +54,10 @@ describe(SeoHeadTags, () => {
 
   it('renders a description tag', () => {
     // Given
-    const props: SeoHeadTagsProps = { description: 'My beautiful page' };
+    const tags = generateHeadTags({ description: 'My beautiful page' });
 
     // When
-    const { container } = render(<SeoHeadTags {...props} />);
+    const { container } = render(<>{tags}</>);
     const el = container.children[0];
 
     // Then
@@ -69,7 +69,7 @@ describe(SeoHeadTags, () => {
 
   it('renders OpenGraph tags', () => {
     // Given
-    const props: SeoHeadTagsProps = {
+    const tags = generateHeadTags({
       openGraph: {
         type: 'article',
         title: 'How to Test with Jest',
@@ -78,10 +78,10 @@ describe(SeoHeadTags, () => {
         'article:tag': ['javascript', 'jest', 'testing'],
         'article:published_time': '2020-12-31',
       },
-    };
+    });
 
     // When
-    const { container } = render(<SeoHeadTags {...props} />);
+    const { container } = render(<>{tags}</>);
 
     // Then
     expect(container.children.length).toEqual(8);
@@ -97,7 +97,7 @@ describe(SeoHeadTags, () => {
 
   it('renders a StructuredData breadcrumb', () => {
     // Given
-    const props: SeoHeadTagsProps = {
+    const tags = generateHeadTags({
       structuredData: {
         breadcrumb: [
           { name: 'Home', item: 'https://www.example.com' },
@@ -105,10 +105,10 @@ describe(SeoHeadTags, () => {
           { name: 'LOTR', item: 'https://www.example.com/books/lotr-4452' },
         ],
       },
-    };
+    });
 
     // When
-    const { container } = render(<SeoHeadTags {...props} />);
+    const { container } = render(<>{tags}</>);
     const el = container.children[0];
 
     // Then
@@ -128,7 +128,7 @@ describe(SeoHeadTags, () => {
 
   it('renders a StructuredData article', () => {
     // Given
-    const props: SeoHeadTagsProps = {
+    const tags = generateHeadTags({
       structuredData: {
         article: {
           headline: 'How to Test with Jest',
@@ -136,10 +136,10 @@ describe(SeoHeadTags, () => {
           datePublished: '2020-12-31',
         },
       },
-    };
+    });
 
     // When
-    const { container } = render(<SeoHeadTags {...props} />);
+    const { container } = render(<>{tags}</>);
     const el = container.children[0];
 
     // Then

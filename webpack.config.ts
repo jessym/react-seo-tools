@@ -1,4 +1,5 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const RemovePlugin = require('remove-files-webpack-plugin');
 const packageDotJson = require('./package.json');
 
@@ -6,7 +7,7 @@ const OUTPUT_DIR = 'lib';
 
 enum Asset {
   index = 'index',
-  SeoHeadTags = 'SeoHeadTags',
+  generateHeadTags = 'generateHeadTags',
   generateRobotsTxt = 'generateRobotsTxt',
   generateSitemapXml = 'generateSitemapXml',
 }
@@ -16,7 +17,7 @@ enum Asset {
 module.exports = {
   entry: {
     [Asset.index]: `./src/${Asset.index}.ts`,
-    [Asset.SeoHeadTags]: `./src/${Asset.SeoHeadTags}.tsx`,
+    [Asset.generateHeadTags]: `./src/${Asset.generateHeadTags}.tsx`,
     [Asset.generateRobotsTxt]: `./src/${Asset.generateRobotsTxt}.ts`,
     [Asset.generateSitemapXml]: `./src/${Asset.generateSitemapXml}.ts`,
   },
@@ -53,6 +54,9 @@ module.exports = {
         ],
       },
     }),
+    new DefinePlugin({
+      PACKAGE_DOT_JSON_VERSION: JSON.stringify(packageDotJson.version),
+    }),
   ],
   optimization: {
     minimize: true,
@@ -61,7 +65,7 @@ module.exports = {
     hints: 'error',
     maxAssetSize: 10_000, // 10 kiB
     assetFilter: (filePath: string) => {
-      const browserAssets = [Asset.SeoHeadTags];
+      const browserAssets = [Asset.generateHeadTags];
       return browserAssets.some((browserAsset) => filePath.includes(browserAsset));
     },
   },
