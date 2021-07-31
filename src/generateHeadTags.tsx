@@ -51,8 +51,7 @@ export function generateHeadTags(options: HeadTagsOptions): ReactElement[] {
         }
         return [];
       })
-      .reduce((array1, array2) => [...array1, ...array2])
-      .forEach((tag) => tags.push(tag));
+      .forEach((array) => array.forEach((tag) => tags.push(tag)));
   }
 
   if (options.structuredData) {
