@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 export type HeadTagsOptions = {
   noIndex?: boolean;
@@ -21,8 +21,8 @@ export type HeadTagsOptions = {
   };
 };
 
-export function generateHeadTags(options: HeadTagsOptions): JSX.Element[] {
-  const tags: JSX.Element[] = [];
+export function generateHeadTags(options: HeadTagsOptions): ReactElement[] {
+  const tags: ReactElement[] = [];
 
   if (options.noIndex) {
     tags.push(<meta key="rst-noindex" name="robots" content="noindex" />);
@@ -39,24 +39,25 @@ export function generateHeadTags(options: HeadTagsOptions): JSX.Element[] {
   if (options.openGraph) {
     Object.keys(options.openGraph)
       .map((key) => {
-        const value = options.openGraph![key];
-        if (typeof value === 'string') {
-          return [<meta key={`rst-og-${key}-${value}`} property={`og:${key}`} content={value} />];
+        const content = options.openGraph![key];
+        const property = key.startsWith('og:') ? key : `og:${key}`;
+        if (typeof content === 'string') {
+          return [<meta key={`rst-${property}-${content}`} property={property} content={content} />];
         }
-        if (Array.isArray(value)) {
-          return value.map((singleValue) => (
-            <meta key={`rst-og-${key}-${singleValue}`} property={`og:${key}`} content={singleValue} />
+        if (Array.isArray(content)) {
+          return content.map((contentElement) => (
+            <meta key={`rst-${property}-${contentElement}`} property={property} content={contentElement} />
           ));
         }
         return [];
       })
-      .reduce((arr1, arr2) => [...arr1, ...arr2])
+      .reduce((array1, array2) => [...array1, ...array2])
       .forEach((tag) => tags.push(tag));
   }
 
   if (options.structuredData) {
     const { breadcrumb, article } = options.structuredData;
-    if (breadcrumb && breadcrumb.length > 0) {
+    if (breadcrumb) {
       tags.push(
         <script key="rst-sd-breadcrumb" type="application/ld+json">
           {JSON.stringify({

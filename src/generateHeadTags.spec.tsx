@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { generateHeadTags } from './generateHeadTags';
+import { generateHeadTags, HeadTagsOptions } from './generateHeadTags';
 
 describe(generateHeadTags, () => {
   beforeEach(() => {
@@ -8,7 +8,9 @@ describe(generateHeadTags, () => {
   });
 
   afterEach(() => {
-    // Make sure there are no errors, like: `Warning: Each child in a list should have a unique "key" prop.`
+    // Make sure there aren't any errors, like:
+    //  - `Warning: Each child in a list should have a unique "key" prop`
+    //  - `Warning: Encountered two children with the same key`
     expect(console.error).not.toHaveBeenCalled();
   });
 
@@ -95,6 +97,24 @@ describe(generateHeadTags, () => {
     expect(findOpenGraphElements(container, 'article:published_time')[0].getAttribute('content')).toEqual('2020-12-31');
   });
 
+  it('doesn\'t add an "og" prefix to OpenGraph tags if the property key already starts with "og"', () => {
+    // Given
+    const tags = generateHeadTags({
+      openGraph: {
+        type: 'article',
+        'og:title': 'How to Test with Jest',
+      },
+    });
+
+    // When
+    const { container } = render(<>{tags}</>);
+    const element = container.children[1];
+
+    // Then
+    expect(container.children.length).toEqual(2);
+    expect(element.getAttribute('property')).toEqual('og:title');
+  });
+
   it('renders a StructuredData breadcrumb', () => {
     // Given
     const tags = generateHeadTags({
@@ -153,6 +173,32 @@ describe(generateHeadTags, () => {
       image: ['https://cdn/image.png'],
       datePublished: '2020-12-31',
     });
+  });
+
+  it('renders everything at the same time', () => {
+    // Given
+    const options: Required<HeadTagsOptions> = {
+      noIndex: true,
+      title: 'Hello World',
+      description: 'My description',
+      openGraph: {
+        type: 'article',
+      },
+      structuredData: {
+        article: {
+          headline: 'My article',
+          datePublished: '2020-12-31',
+          image: 'https://cdn/example.com',
+        },
+        breadcrumb: [{ name: 'Bread', item: 'https://example.com' }],
+      },
+    };
+    const tags = generateHeadTags(options);
+
+    // When
+    render(<>{tags}</>);
+
+    // Then: no errors logged for duplicate keys, or anything
   });
 });
 
