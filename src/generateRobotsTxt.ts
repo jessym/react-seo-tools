@@ -1,12 +1,12 @@
+export type RobotsTxtOptions = {
+  policy?: RobotsTxtPolicy | RobotsTxtPolicy[];
+  sitemap?: string | string[];
+};
+
 export type RobotsTxtPolicy = {
   userAgent?: string | string[];
   allow?: string | string[];
   disallow?: string | string[];
-};
-
-export type RobotsTxtOptions = {
-  policy?: RobotsTxtPolicy | RobotsTxtPolicy[];
-  sitemap?: string | string[];
 };
 
 /**
