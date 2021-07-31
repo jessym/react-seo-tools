@@ -41,11 +41,11 @@ import { generateSitemapXml } from 'react-seo-tools/lib/generateSitemapXml';
 This function generates an array of elements which can be inserted into the `<head>` section of your HTML page.
 
 If you're using the [**Next.js**](https://nextjs.org/) framework,
-you would render these elements inside `<Head></Head>`, as shown by the example below.
+you would render these elements inside a pair of `<Head></Head>` tags, as shown by the example below.
 
 If you're not using Next.js,
-you might want to consider including the [**react-helmet**](https://github.com/nfl/react-helmet) library in your project,
-so you can render the head elements inside a pair of `<Helmet></Helmet>` tags.
+you might want to add the [**react-helmet**](https://github.com/nfl/react-helmet) library to your project,
+so you can render these head elements inside a pair of `<Helmet></Helmet>` tags.
 
 ```tsx
 import Head from 'next/head';
@@ -63,7 +63,7 @@ export default function ArticlePage() {
             title: 'How to SEO',
             image: 'https://www.example.com/how-to-seo.jpg',
             'article:author': 'Jessy',
-            'article:tag': ['react', 'testing'],
+            'article:tag': ['react', 'seo'],
             'article:published_time': '2020-12-31',
           },
         })}
@@ -86,7 +86,7 @@ export default function ArticlePage() {
   <meta property="og:image" content="https://www.example.com/how-to-seo.jpg"/>
   <meta property="og:article:author" content="Jessy"/>
   <meta property="og:article:tag" content="react"/>
-  <meta property="og:article:tag" content="testing"/>
+  <meta property="og:article:tag" content="seo"/>
   <meta property="og:article:published_time" content="2020-12-31"/>
 </head>
 
