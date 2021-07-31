@@ -111,8 +111,7 @@ export default function (req, res) {
     sitemap: 'http://localhost:8080/sitemap.xml',
   });
   res.setHeader('Content-Type', 'text/plain');
-  res.write(robotsTxt);
-  res.end();
+  res.end(robotsTxt);
 }
 
 /**********************
@@ -174,8 +173,7 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
     ],
   });
   res.setHeader('Content-Type', 'application/xml');
-  res.write(sitemapXml);
-  res.end();
+  res.end(sitemapXml);
 }
 
 /**********************
