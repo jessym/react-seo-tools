@@ -193,10 +193,9 @@ describe(generateHeadTags, () => {
         breadcrumb: [{ name: 'Bread', item: 'https://example.com' }],
       },
     };
-    const tags = generateHeadTags(options);
 
     // When
-    render(<>{tags}</>);
+    render(<>{generateHeadTags(options)}</>);
 
     // Then: no errors logged for duplicate keys, or anything
   });

@@ -1,15 +1,5 @@
 import { toXML, XmlElement } from 'jstoxml';
 
-export enum Changefreq {
-  always = 'always',
-  hourly = 'hourly',
-  daily = 'daily',
-  weekly = 'weekly',
-  monthly = 'monthly',
-  yearly = 'yearly',
-  never = 'never',
-}
-
 export type SitemapXmlOptions = {
   urlSet?: Array<{
     loc: string;
@@ -23,6 +13,16 @@ export type SitemapXmlOptions = {
   }>;
   pretty?: boolean;
 };
+
+export enum Changefreq {
+  always = 'always',
+  hourly = 'hourly',
+  daily = 'daily',
+  weekly = 'weekly',
+  monthly = 'monthly',
+  yearly = 'yearly',
+  never = 'never',
+}
 
 /**
  * For more information, see:
