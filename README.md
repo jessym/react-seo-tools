@@ -117,10 +117,10 @@ export default function (req, res) {
 
 /**********************
 
-user-agent: *
-allow: /
+User-agent: *
+Allow: /
 
-sitemap: http://localhost:8080/sitemap.xml
+Sitemap: http://localhost:8080/sitemap.xml
 
 **********************/
 ```
@@ -148,10 +148,10 @@ app.listen(8080);
 
 /**********************
 
-user-agent: *
-allow: /
+User-agent: *
+Allow: /
 
-sitemap: http://localhost:8080/sitemap.xml
+Sitemap: http://localhost:8080/sitemap.xml
 
 **********************/
 ```
