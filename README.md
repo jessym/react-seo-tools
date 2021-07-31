@@ -23,6 +23,12 @@ npm install react-seo-tools
 # Imports
 
 ```ts
+// This imports the entire bundle via this library's index file,
+// which might bloat your own website's bundle size
+// (unless your frontend build tool uses tree shaking)
+import { generateHeadTags, generateRobotsTxt, generateSitemapXml } from 'react-seo-tools';
+
+// Therefore, each of these utilities can also be imported from their own file
 import { generateHeadTags } from 'react-seo-tools/lib/generateHeadTags';
 import { generateRobotsTxt } from 'react-seo-tools/lib/generateRobotsTxt';
 import { generateSitemapXml } from 'react-seo-tools/lib/generateSitemapXml';
