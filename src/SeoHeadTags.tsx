@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-export type HeadTagsOptions = {
+export type SeoHeadTagsProps = {
   noIndex?: boolean;
   title?: string;
   description?: string;
@@ -21,25 +21,25 @@ export type HeadTagsOptions = {
   };
 };
 
-export function generateHeadTags(options: HeadTagsOptions): JSX.Element[] {
+export function SeoHeadTags(props: SeoHeadTagsProps): ReactElement {
   const tags: JSX.Element[] = [];
 
-  if (options.noIndex) {
+  if (props.noIndex) {
     tags.push(<meta key="rst-noindex" name="robots" content="noindex" />);
   }
 
-  if (options.title) {
-    tags.push(<title key="rst-title">{options.title}</title>);
+  if (props.title) {
+    tags.push(<title key="rst-title">{props.title}</title>);
   }
 
-  if (options.description) {
-    tags.push(<meta key="rst-description" name="description" content={options.description} />);
+  if (props.description) {
+    tags.push(<meta key="rst-description" name="description" content={props.description} />);
   }
 
-  if (options.openGraph) {
-    Object.keys(options.openGraph)
+  if (props.openGraph) {
+    Object.keys(props.openGraph)
       .map((key) => {
-        const value = options.openGraph![key];
+        const value = props.openGraph![key];
         if (typeof value === 'string') {
           return [<meta key={`rst-og-${key}-${value}`} property={`og:${key}`} content={value} />];
         }
@@ -54,8 +54,8 @@ export function generateHeadTags(options: HeadTagsOptions): JSX.Element[] {
       .forEach((tag) => tags.push(tag));
   }
 
-  if (options.structuredData) {
-    const { breadcrumb, article } = options.structuredData;
+  if (props.structuredData) {
+    const { breadcrumb, article } = props.structuredData;
     if (breadcrumb && breadcrumb.length > 0) {
       tags.push(
         <script key="rst-sd-breadcrumb" type="application/ld+json">
@@ -87,5 +87,5 @@ export function generateHeadTags(options: HeadTagsOptions): JSX.Element[] {
     }
   }
 
-  return tags;
+  return <>{tags}</>;
 }

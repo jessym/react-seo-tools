@@ -1,30 +1,37 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { generateHeadTags } from './generateHeadTags';
+import { SeoHeadTags, SeoHeadTagsProps } from './SeoHeadTags';
 
-describe(generateHeadTags, () => {
+describe(SeoHeadTags, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'error');
+  });
+
+  afterEach(() => {
+    // Make sure there are no errors, like: `Warning: Each child in a list should have a unique "key" prop.`
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('renders nothing for an empty options object', () => {
     // Given
-    const tags = generateHeadTags({});
+    const props: SeoHeadTagsProps = {};
 
     // When
-    const { container } = render(<>{tags}</>);
+    const { container } = render(<SeoHeadTags {...props} />);
 
     // Then
-    tags.forEach((tag) => expect(tag.key).toBeTruthy());
     expect(container.children.length).toEqual(0);
   });
 
   it('renders a noIndex tag', () => {
     // Given
-    const tags = generateHeadTags({ noIndex: true });
+    const props: SeoHeadTagsProps = { noIndex: true };
 
     // When
-    const { container } = render(<>{tags}</>);
+    const { container } = render(<SeoHeadTags {...props} />);
     const el = container.children[0];
 
     // Then
-    tags.forEach((tag) => expect(tag.key).toBeTruthy());
     expect(container.children.length).toEqual(1);
     expect(el.tagName).toEqual('META');
     expect(el.getAttribute('name')).toEqual('robots');
@@ -33,14 +40,13 @@ describe(generateHeadTags, () => {
 
   it('renders a title tag', () => {
     // Given
-    const tags = generateHeadTags({ title: 'Hello World' });
+    const props: SeoHeadTagsProps = { title: 'Hello World' };
 
     // When
-    const { container } = render(<>{tags}</>);
+    const { container } = render(<SeoHeadTags {...props} />);
     const el = container.children[0];
 
     // Then
-    tags.forEach((tag) => expect(tag.key).toBeTruthy());
     expect(container.children.length).toEqual(1);
     expect(el.tagName).toEqual('TITLE');
     expect(el.innerHTML).toEqual('Hello World');
@@ -48,14 +54,13 @@ describe(generateHeadTags, () => {
 
   it('renders a description tag', () => {
     // Given
-    const tags = generateHeadTags({ description: 'My beautiful page' });
+    const props: SeoHeadTagsProps = { description: 'My beautiful page' };
 
     // When
-    const { container } = render(<>{tags}</>);
+    const { container } = render(<SeoHeadTags {...props} />);
     const el = container.children[0];
 
     // Then
-    tags.forEach((tag) => expect(tag.key).toBeTruthy());
     expect(container.children.length).toEqual(1);
     expect(el.tagName).toEqual('META');
     expect(el.getAttribute('name')).toEqual('description');
@@ -64,7 +69,7 @@ describe(generateHeadTags, () => {
 
   it('renders OpenGraph tags', () => {
     // Given
-    const tags = generateHeadTags({
+    const props: SeoHeadTagsProps = {
       openGraph: {
         type: 'article',
         title: 'How to Test with Jest',
@@ -73,13 +78,12 @@ describe(generateHeadTags, () => {
         'article:tag': ['javascript', 'jest', 'testing'],
         'article:published_time': '2020-12-31',
       },
-    });
+    };
 
     // When
-    const { container } = render(<>{tags}</>);
+    const { container } = render(<SeoHeadTags {...props} />);
 
     // Then
-    tags.forEach((tag) => expect(tag.key).toBeTruthy());
     expect(container.children.length).toEqual(8);
     expect(findOpenGraphElements(container, 'type')[0].getAttribute('content')).toEqual('article');
     expect(findOpenGraphElements(container, 'title')[0].getAttribute('content')).toEqual('How to Test with Jest');
@@ -93,7 +97,7 @@ describe(generateHeadTags, () => {
 
   it('renders a StructuredData breadcrumb', () => {
     // Given
-    const tags = generateHeadTags({
+    const props: SeoHeadTagsProps = {
       structuredData: {
         breadcrumb: [
           { name: 'Home', item: 'https://www.example.com' },
@@ -101,14 +105,13 @@ describe(generateHeadTags, () => {
           { name: 'LOTR', item: 'https://www.example.com/books/lotr-4452' },
         ],
       },
-    });
+    };
 
     // When
-    const { container } = render(<>{tags}</>);
+    const { container } = render(<SeoHeadTags {...props} />);
     const el = container.children[0];
 
     // Then
-    tags.forEach((tag) => expect(tag.key).toBeTruthy());
     expect(container.children.length).toEqual(1);
     expect(el.tagName).toEqual('SCRIPT');
     expect(el.getAttribute('type')).toEqual('application/ld+json');
@@ -125,7 +128,7 @@ describe(generateHeadTags, () => {
 
   it('renders a StructuredData article', () => {
     // Given
-    const tags = generateHeadTags({
+    const props: SeoHeadTagsProps = {
       structuredData: {
         article: {
           headline: 'How to Test with Jest',
@@ -133,14 +136,13 @@ describe(generateHeadTags, () => {
           datePublished: '2020-12-31',
         },
       },
-    });
+    };
 
     // When
-    const { container } = render(<>{tags}</>);
+    const { container } = render(<SeoHeadTags {...props} />);
     const el = container.children[0];
 
     // Then
-    tags.forEach((tag) => expect(tag.key).toBeTruthy());
     expect(container.children.length).toEqual(1);
     expect(el.tagName).toEqual('SCRIPT');
     expect(el.getAttribute('type')).toEqual('application/ld+json');
