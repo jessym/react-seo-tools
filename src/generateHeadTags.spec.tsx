@@ -97,7 +97,7 @@ describe(generateHeadTags, () => {
     expect(findOpenGraphElements(container, 'article:published_time')[0].getAttribute('content')).toEqual('2020-12-31');
   });
 
-  it('doesn\'t add an "og" prefix to OpenGraph tags if the property key already starts with "og"', () => {
+  it(`doesn't add an "og" prefix to OpenGraph tags if the property key already starts with "og"`, () => {
     // Given
     const tags = generateHeadTags({
       openGraph: {

@@ -168,8 +168,9 @@ import { generateSitemapXml, Changefreq } from 'react-seo-tools/lib/generateSite
 
 export default function (req: NextApiRequest, res: NextApiResponse) {
   const sitemapXml = generateSitemapXml({
+    hostname: 'https://www.example.com',
     urlSet: [
-      { loc: '/' },
+      { loc: '' },
       { loc: '/articles', lastmod: '2020-12-31', changefreq: Changefreq.daily },
       { loc: '/articles/123', lastmod: '2020-12-31', changefreq: Changefreq.monthly },
     ],
@@ -182,15 +183,15 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/</loc>
+    <loc>https://www.example.com</loc>
   </url>
   <url>
-    <loc>/articles</loc>
+    <loc>https://www.example.com/articles</loc>
     <lastmod>2020-12-31</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
-    <loc>/articles/123</loc>
+    <loc>https://www.example.com/articles/123</loc>
     <lastmod>2020-12-31</lastmod>
     <changefreq>monthly</changefreq>
   </url>
@@ -209,8 +210,9 @@ const app = express();
 
 app.get('/sitemap.xml', (req, res) => {
   const sitemapXml = generateSitemapXml({
+    hostname: 'https://www.example.com',
     urlSet: [
-      { loc: '/' },
+      { loc: '' },
       { loc: '/articles', lastmod: '2020-12-31', changefreq: Changefreq.daily },
       { loc: '/articles/123', lastmod: '2020-12-31', changefreq: Changefreq.monthly },
     ],
@@ -224,15 +226,15 @@ app.listen(8080);
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/</loc>
+    <loc>https://www.example.com</loc>
   </url>
   <url>
-    <loc>/articles</loc>
+    <loc>https://www.example.com/articles</loc>
     <lastmod>2020-12-31</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
-    <loc>/articles/123</loc>
+    <loc>https://www.example.com/articles/123</loc>
     <lastmod>2020-12-31</lastmod>
     <changefreq>monthly</changefreq>
   </url>

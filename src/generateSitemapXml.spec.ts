@@ -81,4 +81,47 @@ describe(generateSitemapXml, () => {
     `;
     expect(xml).toEqual(expected.trim());
   });
+
+  it('prefixes url set locations with a hostname', () => {
+    // When
+    const xml = generateSitemapXml({
+      hostname: 'http://localhost:8080',
+      urlSet: [{ loc: '' }, { loc: '/about-us' }],
+      pretty: true,
+    });
+
+    // Then
+    const expected = `
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:8080</loc>
+  </url>
+  <url>
+    <loc>http://localhost:8080/about-us</loc>
+  </url>
+</urlset>
+    `;
+    expect(xml).toEqual(expected.trim());
+  });
+
+  it('prefixes sitemap index locations with a hostname', () => {
+    // When
+    const xml = generateSitemapXml({
+      hostname: 'http://localhost:8080',
+      sitemapIndex: [{ loc: '/marketing-sitemap.xml' }],
+      pretty: true,
+    });
+
+    // Then
+    const expected = `
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>http://localhost:8080/marketing-sitemap.xml</loc>
+  </sitemap>
+</sitemapindex>
+    `;
+    expect(xml).toEqual(expected.trim());
+  });
 });

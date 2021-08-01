@@ -1,6 +1,7 @@
 import { toXML, XmlElement } from 'jstoxml';
 
 export type SitemapXmlOptions = {
+  hostname?: string;
   urlSet?: Array<{
     loc: string;
     lastmod?: string;
@@ -47,7 +48,7 @@ export function generateSitemapXml(options: SitemapXmlOptions): string {
         _content: [],
       };
       const urlContent = url._content as XmlElement[];
-      urlContent.push({ loc });
+      urlContent.push({ loc: `${options.hostname || ''}${loc}` });
       if (lastmod) urlContent.push({ lastmod });
       if (changefreq) urlContent.push({ changefreq });
       if (typeof priority === 'number') urlContent.push({ priority });
@@ -68,7 +69,7 @@ export function generateSitemapXml(options: SitemapXmlOptions): string {
         _content: [],
       };
       const sitemapContent = sitemap._content as XmlElement[];
-      sitemapContent.push({ loc });
+      sitemapContent.push({ loc: `${options.hostname || ''}${loc}` });
       if (lastmod) sitemapContent.push({ lastmod });
       // Add to root
       (root._content as XmlElement[]).push(sitemap);
