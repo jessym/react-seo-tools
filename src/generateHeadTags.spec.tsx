@@ -122,7 +122,7 @@ describe(generateHeadTags, () => {
         breadcrumb: [
           { name: 'Home', item: 'https://www.example.com' },
           { name: 'Books', item: 'https://www.example.com/books' },
-          { name: 'LOTR', item: 'https://www.example.com/books/lotr-4452' },
+          { name: 'LO > TR', item: 'https://www.example.com/books/lotr-4452' },
         ],
       },
     });
@@ -141,7 +141,7 @@ describe(generateHeadTags, () => {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.example.com' },
         { '@type': 'ListItem', position: 2, name: 'Books', item: 'https://www.example.com/books' },
-        { '@type': 'ListItem', position: 3, name: 'LOTR', item: 'https://www.example.com/books/lotr-4452' },
+        { '@type': 'ListItem', position: 3, name: 'LO &gt; TR', item: 'https://www.example.com/books/lotr-4452' },
       ],
     });
   });
@@ -151,7 +151,7 @@ describe(generateHeadTags, () => {
     const tags = generateHeadTags({
       structuredData: {
         article: {
-          headline: 'How to Test with Jest',
+          headline: 'How to Test with Jest <',
           image: 'https://cdn/image.png',
           datePublished: '2020-12-31',
         },
@@ -169,7 +169,7 @@ describe(generateHeadTags, () => {
     expect(JSON.parse(element.innerHTML)).toEqual({
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: 'How to Test with Jest',
+      headline: 'How to Test with Jest &lt;',
       image: ['https://cdn/image.png'],
       datePublished: '2020-12-31',
     });

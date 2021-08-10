@@ -58,34 +58,55 @@ export function generateHeadTags(options: HeadTagsOptions): ReactElement[] {
     const { breadcrumb, article } = options.structuredData;
     if (breadcrumb) {
       tags.push(
-        <script key="rst-sd-breadcrumb" type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: breadcrumb.map((bc, index) => ({
-              '@type': 'ListItem',
-              position: index + 1,
-              name: bc.name,
-              item: bc.item,
-            })),
-          })}
-        </script>
+        <script
+          key="rst-sd-breadcrumb"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: htmlEncodeAngleBrackets(
+              JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'BreadcrumbList',
+                itemListElement: breadcrumb.map((bc, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: bc.name,
+                  item: bc.item,
+                })),
+              })
+            ),
+          }}
+        />
       );
     }
     if (article) {
       tags.push(
-        <script key="rst-sd-article" type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: article.headline,
-            image: [article.image],
-            datePublished: article.datePublished,
-          })}
-        </script>
+        <script
+          key="rst-sd-article"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: htmlEncodeAngleBrackets(
+              JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Article',
+                headline: article.headline,
+                image: [article.image],
+                datePublished: article.datePublished,
+              })
+            ),
+          }}
+        />
       );
     }
   }
 
   return tags;
+}
+
+function htmlEncodeAngleBrackets(str: string) {
+  const pattern = /[<>]/g;
+  const replacements: Record<string, string> = {
+    '<': '&lt;',
+    '>': '&gt;',
+  };
+  return str.replace(pattern, (match) => replacements[match]);
 }
