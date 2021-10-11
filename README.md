@@ -1,10 +1,12 @@
 # React SEO Tools
 
-This library for React-based websites and applications can be used to:
+This library for React-based websites and applications can be used for 3 things:
 
-- generate SEO-related tags for the HTML `<head>` section
-- generate a `robots.txt` file for search engine crawlers
-- generate a `sitemap.xml` overview of URLs
+- generating SEO-related tags for the HTML `<head>` section
+- generating a `robots.txt` file for search engine crawlers
+- generating a `sitemap.xml` overview of URLs
+
+It works especially well with the [**Next.js**](https://nextjs.org/) framework.
 
 # Installation
 
@@ -24,7 +26,7 @@ npm install react-seo-tools
 
 ```ts
 // This imports the entire bundle via this library's index file,
-// which might bloat your own website's bundle size
+// which might inflate your own website's bundle size a small bit
 // (unless your frontend build tool uses tree shaking)
 import { generateHeadTags, generateRobotsTxt, generateSitemapXml } from 'react-seo-tools';
 
@@ -40,7 +42,7 @@ import { generateSitemapXml } from 'react-seo-tools/lib/generateSitemapXml';
 
 This function generates an array of elements which can be inserted into the `<head>` section of your HTML page.
 
-If you're using the [**Next.js**](https://nextjs.org/) framework,
+If you're using [**Next.js**](https://nextjs.org/),
 you would render these elements inside a pair of `<Head></Head>` tags, as shown by the example below.
 
 If you're not using Next.js,
@@ -125,7 +127,7 @@ Sitemap: http://localhost:8080/sitemap.xml
 **********************/
 ```
 
-And here's how you'd use it with **Express in a Node environment**.
+And here's how you'd use it with **Express (Node)**.
 
 ```js
 const express = require('express');
@@ -200,7 +202,7 @@ export default function (req: NextApiRequest, res: NextApiResponse) {
 **********************/
 ```
 
-And here's how you'd use it with **Express in a Node environment**.
+And here's how you'd use it with **Express (Node)**.
 
 ```ts
 const express = require('express');

@@ -102,7 +102,7 @@ export function generateHeadTags(options: HeadTagsOptions): ReactElement[] {
   return tags;
 }
 
-function htmlEncodeAngleBrackets(str: string) {
+function htmlEncodeAngleBrackets(str: string): string {
   const pattern = /[<>]/g;
   const replacements: Record<string, string> = {
     '<': '&lt;',
